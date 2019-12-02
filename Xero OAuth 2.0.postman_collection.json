@@ -13,10 +13,7 @@
 					"script": {
 						"id": "0e37c12b-9b8b-48ee-8c83-52a021668330",
 						"exec": [
-							"var data = JSON.parse(responseBody);",
-							"postman.setEnvironmentVariable(\"xero-tenant-id\", data[0].TenantId);",
-							"",
-							"tests[\"xero-tenant-id: \" + pm.environment.get(\"xero-tenant-id\")] = true;"
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -73,7 +70,7 @@
 						"id": "6c8ecf27-a232-4b87-931d-8cced27b1fbc",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
-							"postman.setEnvironmentVariable(\"xero-tenant-id\", data[0].TenantId);",
+							"postman.setEnvironmentVariable(\"xero-tenant-id\", data[0].tenantId);",
 							"",
 							"tests[\"xero-tenant-id: \" + pm.environment.get(\"xero-tenant-id\")] = true;"
 						],
