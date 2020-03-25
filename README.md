@@ -66,13 +66,9 @@ At this stage you will be prompted to log in to Xero.
 
 ![Login to Xero](images/5_3_askedToLogin.PNG)
 
-If you've included the `openid profile email` scopes, you'll be asked to access your basic profile information.
+You'll then be taken through to the consent screen. Select the Organisation you want to connect to. If you want to connect to more than one Organisation, you can repeat the steps above and select another Organisation. If you've included the `openid profile email` scopes, you'll also be asked to access your basic profile information.
 
-![Allow Basic Profile Information](images/5_4_basicProfile.PNG)
-
-You'll then be taken through to the Organisation Select window. Select the Organisation you want to connect to. If you want to connect to more than one Organisation, you can repeat the steps above and select another Organisation. 
-
-![Select your Organisation](images/5_5_selectOrganisation.PNG)
+![Grant consent](images/5_4_grantConsent.png)
 
 Once complete you'll be passed back to Postman.
 
