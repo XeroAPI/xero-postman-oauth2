@@ -226,8 +226,8 @@
 						"id": "13fa9e86-79a7-4c61-becb-f6fd284b9383",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
-							"postman.setEnvironmentVariable(\"access_token\", data.access_token);",
-							"postman.setEnvironmentVariable(\"refresh_token\", data.refresh_token);",
+							"if (data.access_token) {postman.setEnvironmentVariable(\"access_token\", data.access_token)};",
+							"if (data.refresh_token) {postman.setEnvironmentVariable(\"refresh_token\", data.refresh_token)};",
 							"",
 							"tests[\"Access Token: \" + pm.environment.get(\"access_token\") + \" Refresh Token: \" + pm.environment.get(\"refresh_token\")] = true;"
 						],
