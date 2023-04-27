@@ -21,7 +21,7 @@ Use the following values:
 * Company or application URL - this needs to be an https address, but isn't used.
 * OAuth 2.0 redirect URI - also needs to be https but won’t be used in Postman
 
-![create an oauth2 app](images/2_1_addAppNEW.PNG)
+![create an oauth2 app](images/2_1AddAppNEW.png)
 
 Click Create App
 
@@ -35,7 +35,7 @@ Then:
 ### 3. Add your first set of environment variables in Postman
 Copy the Client id, Client secret and OAuth 2.0 redirect URI from the My Apps screen into the environment variables in Postman. To add these details to the Environment, make sure you have the OAuth 2.0 Environment selected, click the eye button, then edit.
 
-![Environment with some details](images/3_1_addedToEnvironmentNEW.PNG)
+![Environment with some details](images/3_1_addedToEnvironmentNEW.png)
 
 ### 4. Add the scopes for the endpoints you will be accessing.
 Our Developer Center lists the available scopes [here](https://developer.xero.com/documentation/oauth2/scopes). For getting started you will need at least:
@@ -48,30 +48,31 @@ In addition, to make further test calls we would also suggest adding:
 
 Add the scopes required to the `scopes` environment variable.
 
-![Add some Scopes to your Environment](images/4_1_addScopesToEnvironmentNEW.PNG)
+![Add some Scopes to your Environment](images/4_1_addScopesToEnvironmentNEW.png)
 
 ### 5. Generate your access token
 1. Double-click on the GET Get Started request under the Xero OAuth 2.0 Collection
 1. Select the Authorization tab
 1. Scroll down to the Configure New Token section
 
-![Configure new access token](images/5_2_addTheVariablesAndURLsNEW.PNG)
+![Configure new access token](images/5_2_addTheVariablesAndURLsNEW.png)
 
 1. Add the Variable names surrounded by {{}} from your Environment into the fields, as shown in the screenshot below
 1. Add https://login.xero.com/identity/connect/authorize to the Auth URL field
 1. Add https://identity.xero.com/connect/token to the Access Token Field
 1. Click Get New Access Token
 
-![Request your Access Token](images/images/5_1_generateAccessTokenNEW.png)
+
+![Request your Access Token](images/5_1_generateAccessTokenNEW.png)
 
 At this stage you will be prompted to log in to Xero. 
 
-![Login to Xero](images/5_3_askedToLoginNEW.PNG)
+![Login to Xero](images/5_3_askedToLoginNEW.png)
 
 You'll then be taken through to the Organisation Select window. If you've included the `openid profile email` scopes, you'll be asked to access your basic profile information as well as other data relevant to the scopes requested.
 Select the Organisation you want to connect to. If you want to connect to more than one Organisation, you can repeat the steps above and select another Organisation. 
 
-![Select your Organisation](5_4_userConsentNEW.PNG)
+![Select your Organisation](images/5_4_userConsentNEW.png)
 
 Once complete you'll be passed back to Postman.
 
@@ -95,7 +96,7 @@ Scroll down the Manage Access Tokens pop up and follow a similar process for the
 1. Click Send (If this results in an error you may need to run the Token Refresh call first)
 1. Like we did for the Access and Refresh Tokens, highlight the tenantId from the response, right click and select Set > OAuth 2.0 > xero-tenant-id
 
-![GET access token](images/7_1_addTheTenantIDNEW.PNG)
+![GET access token](images/7_1_addTheTenantIDNEW.png)
 
 Congrats! You're now authenticated and can start making API calls. Your access token will last for 30mins, after which time you'll need to refresh the token. 
 
