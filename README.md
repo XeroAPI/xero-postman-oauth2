@@ -26,6 +26,7 @@ Download `Xero OAuth 2.0.postman_collection.json` and `OAuth 2.0.postman_environ
 | `client_id` | Your app's client ID from developer.xero.com |
 | `re_directURI` | Your app's redirect URI |
 | `scopes` | Space-separated list of scopes (see below) |
+| `state` | Any random string, e.g. `abc123` |
 
 **Recommended scopes to start:**
 ```
@@ -69,10 +70,10 @@ openid profile email offline_access accounting.transactions accounting.contacts 
 
 Once authenticated, Postman shows the **Manage Access Tokens** dialog:
 
-1. Highlight the **Access Token** value → right-click → **Set: OAuth 2.0 → access_token**
-2. Scroll down → highlight the **Refresh Token** value → right-click → **Set: OAuth 2.0 → refresh_token**
+1. Copy the **Access Token** value → open the **OAuth 2.0** environment editor → paste into `access_token`
+2. Copy the **Refresh Token** value → paste into `refresh_token`
 
-[SCREENSHOT NEEDED: Manage Access Tokens dialog with Access Token highlighted, right-click menu visible]
+[SCREENSHOT NEEDED: Manage Access Tokens dialog showing Access Token and Refresh Token values]
 
 ### 5. Get your tenant ID
 
@@ -92,7 +93,7 @@ The test script automatically sets `xero-tenant-id` from the first organisation 
 1. Double-click the **Invoices** request
 2. Click **Send**
 
-The request automatically refreshes your access token before sending.
+The request automatically refreshes your access token before sending. If you get a 401 error, run the **Refresh token** request manually first.
 
 ### 7. Refresh the token manually
 
