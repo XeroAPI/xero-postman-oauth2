@@ -5,7 +5,8 @@ A Postman collection for authenticating to the Xero API using a PKCE (Proof Key 
 ## Prerequisites
 
 - Postman desktop app installed (browser extension does not support environment variables)
-- A PKCE app created at [developer.xero.com/myapps](https://developer.xero.com/myapps) with your `client_id` and redirect URI ready
+- A PKCE app created at [developer.xero.com](https://developer.xero.com/app/manage) with your `client_id` ready
+- Add `https://oauth.pstmn.io/v1/callback` as one of your app's redirect URIs
 
 ---
 
@@ -13,20 +14,18 @@ A Postman collection for authenticating to the Xero API using a PKCE (Proof Key 
 
 ### 1. Import the collection and environment
 
-Download `Xero OAuth 2.0.postman_collection.json` and `OAuth 2.0.postman_environment.json` from this repo and import them via **File → Import** in Postman.
+Download `XeroOAuth2PKCE.postman_collection.json` and `XeroOAuth2PKCE.postman_environment.json` from this repo and import them via **File → Import** in Postman.
 
 ### 2. Configure your environment variables
 
-1. Select the **OAuth 2.0** environment from the environment dropdown (top right of Postman)
+1. Select the **Xero OAuth 2.0 PKCE** environment from the environment dropdown (top right of Postman)
 2. Click the eye icon → **Edit**
 3. Fill in the following variables:
 
 | Variable | Value |
 |---|---|
 | `client_id` | Your app's client ID from developer.xero.com |
-| `re_directURI` | Your app's redirect URI |
 | `scopes` | Space-separated list of scopes (see below) |
-| `state` | Any random string, e.g. `abc123` |
 
 **Recommended scopes to start:**
 ```
@@ -35,78 +34,34 @@ openid profile email offline_access accounting.transactions accounting.contacts 
 
 > `offline_access` is required to receive a refresh token.
 
-[SCREENSHOT NEEDED: Postman environment editor with client_id, re_directURI, and scopes filled in]
+![env-filled](./images/2-1-edit-env.png)
 
 ---
 
 ## Phase 2: Get a Token
 
-### 3. Configure OAuth 2.0 with PKCE in Postman
+### 3. Get an access token
 
-1. Double-click the **Get started** request in the collection
-2. Select the **Authorization** tab
-3. Set **Type** to `OAuth 2.0`
-4. Under **Configure New Token**, fill in:
+1. Select the **Authorization** tab
+2. Click **Get New Access Token**
 
-| Field | Value |
-|---|---|
-| Token Name | `Xero` |
-| Grant Type | `Authorization Code (With PKCE)` |
-| Callback URL | `{{re_directURI}}` |
-| Auth URL | `https://login.xero.com/identity/connect/authorize` |
-| Access Token URL | `https://identity.xero.com/connect/token` |
-| Client ID | `{{client_id}}` |
-| Code Challenge Method | `SHA-256` |
-| Scope | `{{scopes}}` |
-| State | `{{state}}` |
+![get-token](./images/3-1-get-new-access-token.png)
 
-[SCREENSHOT NEEDED: Postman Authorization tab showing PKCE configuration filled in]
+3. Log in to Xero in the browser window that opens
+4. Select the organisation to connect and grant access
+5. The authorisation process completes and redirects back to Postman for you to get the token 
 
-5. Click **Get New Access Token**
-6. Log in to Xero in the browser window that opens
-7. Select the organisation to connect and grant access
+![token](./images/3-5-token.png)
 
-### 4. Set your access and refresh tokens
+#### Sanity check
 
-Once authenticated, Postman shows the **Manage Access Tokens** dialog:
+You should be able to use the access token to call the Connections endpoint and retrieve your connected tenants.
 
-1. Copy the **Access Token** value → open the **OAuth 2.0** environment editor → paste into `access_token`
-2. Copy the **Refresh Token** value → paste into `refresh_token`
+![verify](./images/3-5-verify.png)
 
-[SCREENSHOT NEEDED: Manage Access Tokens dialog showing Access Token and Refresh Token values]
+### 4. Use the token to connect to your MCP Host of choice
 
-### 5. Get your tenant ID
+You can now use the token to connect to Xero's MCP Server
 
-1. Double-click the **Connections** request
-2. Click **Send**
+**Note**: The token expires after 30 minutes so you will have to re-retrieve the token or refresh the current token.
 
-The test script automatically sets `xero-tenant-id` from the first organisation in the response.
-
-[SCREENSHOT NEEDED: Connections response body showing tenantId field in the JSON array]
-
----
-
-## Phase 3: Make API Calls
-
-### 6. Make your first API call
-
-1. Double-click the **Invoices** request
-2. Click **Send**
-
-The request automatically refreshes your access token before sending. If you get a 401 error, run the **Refresh token** request manually first.
-
-### 7. Refresh the token manually
-
-Your access token expires after 30 minutes. To refresh manually:
-
-1. Double-click the **Refresh token** request
-2. Click **Send**
-
-The test script automatically updates `access_token` and `refresh_token` in your environment.
-
----
-
-## Notes
-
-- To connect to a different organisation, repeat steps 3–5 and select a different organisation.
-- Available scopes: [developer.xero.com/documentation/oauth2/scopes](https://developer.xero.com/documentation/oauth2/scopes)
