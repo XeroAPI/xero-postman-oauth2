@@ -1,0 +1,118 @@
+{
+  "info": {
+    "_postman_id": "0809ba1f-9633-4a0e-9adf-6f0bdf3b7094",
+    "name": "Xero OAuth 2.0 PKCE",
+    "description": "Navigate to the Authorisation tab to get started",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "8623196"
+  },
+  "item": [
+    {
+      "name": "Connections",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://api.xero.com/connections",
+          "protocol": "https",
+          "host": [
+            "api",
+            "xero",
+            "com"
+          ],
+          "path": [
+            "connections"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "state",
+        "value": "{{$randomAlphaNumeric}}",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code_with_pkce",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://login.xero.com/identity/connect/authorize",
+        "type": "string"
+      },
+      {
+        "key": "useBrowser",
+        "value": true,
+        "type": "boolean"
+      },
+      {
+        "key": "clientId",
+        "value": "{{client-id}}",
+        "type": "string"
+      },
+      {
+        "key": "clientSecret",
+        "value": "",
+        "type": "string"
+      },
+      {
+        "key": "addTokenTo",
+        "value": "header",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://identity.xero.com/connect/token",
+        "type": "string"
+      },
+      {
+        "key": "scope",
+        "value": "{{scopes}}",
+        "type": "string"
+      },
+      {
+        "key": "tokenName",
+        "value": "MyToken",
+        "type": "string"
+      },
+      {
+        "key": "challengeAlgorithm",
+        "value": "S256",
+        "type": "string"
+      },
+      {
+        "key": "client_authentication",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ]
+}
